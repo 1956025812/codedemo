@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yzx.codedemo.mapper.user.SysUserMapper">
+
+  <resultMap id="BaseResultMap" type="com.yzx.codedemo.entity.user.SysUser">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+
+  <!-- 查询用户返回Map -->
+  <resultMap id="SelectSysUserVOMap" type="com.yzx.codedemo.vo.user.SysUserVO">
+    <id column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+
+  <!-- 查询用户列表返回Map -->
+  <resultMap id="SelectSysUserVOListMap" type="com.yzx.codedemo.vo.user.SysUserVO">
+    <id column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+
+  <!-- 查询用户分页列表返回Map -->
+  <resultMap id="SelectSysUserPageMap" type="com.yzx.codedemo.vo.user.SysUserVO">
+    <id column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+
+  <sql id="Base_Column_List">
+    id, user_name, password, phone, state, createtime
+  </sql>
+
+
+  <insert id="insertSelective" parameterType="com.yzx.codedemo.entity.user.SysUser">
+    INSERT INTO sys_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+
+  <!-- 批量新增用户 -->
+  <insert id="saveSysUserBatch" parameterType="java.util.List">
+    INSERT INTO sys_user
+          (id, user_name, password, phone, state, createtime)
+    VALUES
+        <foreach collection="sysUserList" item="sysUser" separator=",">
+          (#{sysUser.id}, #{sysUser.userName}, #{sysUser.password}, #{sysUser.phone}, #{sysUser.state}, #{sysUser.createtime})
+        </foreach>
+  </insert>
+
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.yzx.codedemo.entity.user.SysUser">
+    UPDATE sys_user
+    <set>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+    </set>
+    WHERE
+      id = #{id,jdbcType=VARCHAR}
+  </update>
+
+
+  <!-- 批量修改用户 -->
+  <update id="updateSysUserBatch" parameterType="java.util.List">
+    <foreach collection="sysUserList" item="sysUser" separator=";">
+        UPDATE sys_user
+        <set>
+          <if test="sysUser.password != null and sysUser.password != ''">
+              password = #{sysUser.password},
+          </if>
+          <if test="sysUser.phone != null and sysUser.phone != ''">
+              phone = #{sysUser.phone},
+          </if>
+        </set>
+        WHERE
+          id = #{sysUser.id}
+    </foreach>
+  </update>
+
+
+  <!-- 批量修改用户状态 -->
+  <update id="updateSysUserStateBatch" parameterType="com.yzx.codedemo.vo.user.SysUserVO">
+    UPDATE
+      sys_user
+    SET
+      state = #{userState}
+    WHERE
+      id IN 
+      <foreach collection="userIdList" item="userId" open="(" close=")" separator=",">
+          #{userId}
+      </foreach>
+  </update>
+
+
+  <!-- 根据主键查询用户对象 -->
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT
+        <include refid="Base_Column_List" />
+    FROM
+        sys_user
+    WHERE
+        id = #{id,jdbcType=VARCHAR}
+  </select>
+
+
+  <!-- 查询用户 -->
+  <select id="selectSysUserVO" parameterType="com.yzx.codedemo.vo.user.SysUserVO" resultMap="SelectSysUserVOMap">
+    SELECT
+        id AS user_id, user_name, password, phone, createtime
+    FROM
+        sys_user
+    WHERE 1=1
+        <if test="userId != null and userId != ''">
+            AND id = #{userId}
+        </if>
+        <if test="userName != null and userName != ''">
+            AND user_name = #{userName}
+        </if>
+        <if test="password != null and password != ''">
+            AND password = #{password}
+        </if>
+        <if test="phone != null and phone != ''">
+            AND phone = #{phone}
+        </if>
+    LIMIT 1
+  </select>
+
+
+  <!-- 查询用户列表 -->
+  <select id="selectSysUserVOList" parameterType="com.yzx.codedemo.vo.user.SysUserVO" resultMap="SelectSysUserVOListMap">
+    SELECT
+        id AS user_id, user_name, password, phone, createtime
+    FROM
+        sys_user
+    WHERE 1=1
+        <if test="userName != null and userName != ''">
+          AND user_name LIKE CONCAT("%", #{userName}, "%")
+        </if>
+        <if test="phone != null and phone != ''">
+          AND phone LIKE CONCAT("%", #{phone}, "%")
+        </if>
+        <if test="userState != null ">
+          AND state = #{userState}
+        </if>
+        <if test="starttime != null">
+          AND createtime >= #{starttime}
+        </if>
+        <if test="endtime != null">
+          AND <![CDATA[ createtime  <= #{endtime} ]]>
+        </if>
+    ORDER BY createtime DESC
+  </select>
+
+
+  <!-- 查询用户分页列表 -->
+  <select id="selectSysUserPage" parameterType="com.yzx.codedemo.vo.user.SysUserVO" resultMap="SelectSysUserPageMap">
+    SELECT
+        id AS user_id, user_name, password, phone, createtime
+    FROM
+        sys_user
+    WHERE 1=1
+        <if test="userName != null and userName != ''">
+            AND user_name LIKE CONCAT("%", #{userName}, "%")
+        </if>
+        <if test="phone != null and phone != ''">
+            AND phone LIKE CONCAT("%", #{phone}, "%")
+        </if>
+        <if test="userState != null ">
+            AND state = #{userState}
+        </if>
+        <if test="starttime != null">
+            AND createtime >= #{starttime}
+        </if>
+        <if test="endtime != null">
+            AND <![CDATA[ createtime  <= #{endtime} ]]>
+        </if>
+    ORDER BY createtime DESC
+  </select>
+
+</mapper>

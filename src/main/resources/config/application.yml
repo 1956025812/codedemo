@@ -1,0 +1,37 @@
+server:
+  port: 8080
+
+# 配置文件
+spring:
+  profiles:
+    active: dev
+
+
+mybatis:
+  mapper-locations: classpath:com.yzx.codedemo.mapper/*.xml
+  type-aliases-package: com.yzx.codedemo.entity
+
+# pagehelper
+pagehelper:
+    helperDialect: mysql
+    reasonable: false # 如果没有数据  返回空 而非最后一页的数据
+    supportMethodsArguments: true
+    params: count=countSql
+    returnPageInfo: check
+
+
+# 日志
+logging:
+  level:
+    com:
+      yzx:
+        codedemo:
+          mapper: debug
+
+
+
+
+
+
+
+
