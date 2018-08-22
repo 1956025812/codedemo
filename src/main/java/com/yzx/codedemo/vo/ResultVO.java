@@ -12,8 +12,10 @@ public class ResultVO<T> {
 
     @ApiModelProperty("状态码 0失败 1成功 ")
     private Integer code;
+
     @ApiModelProperty("返回信息")
     private String msg;
+
     @ApiModelProperty("返回数据")
     private T data;
 

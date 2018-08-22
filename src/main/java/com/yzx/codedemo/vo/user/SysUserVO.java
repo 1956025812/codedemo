@@ -13,14 +13,19 @@ public class SysUserVO {
 
     @ApiModelProperty("用户ID")
     private String userId;
+
     @ApiModelProperty("用户名称")
     private String userName;
+
     @ApiModelProperty("密码")
     private String password;
+
     @ApiModelProperty("手机号")
     private String phone;
+
     @ApiModelProperty("用户状态 0正常 1删除")
     private Integer userState;
+
     @ApiModelProperty("创建时间 yyyy-MM-dd HH:mm:ss格式")
     private Date createtime;
 
@@ -40,6 +45,7 @@ public class SysUserVO {
 
     @ApiModelProperty("当前页码")
     private Integer currentPage;
+
     @ApiModelProperty("每页条数")
     private Integer pageSize;
 

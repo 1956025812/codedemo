@@ -13,12 +13,16 @@ public class PageVO<T> {
 
     @ApiModelProperty("当前页码")
     private Integer currentPage = 1;
+
     @ApiModelProperty("每页记录数")
     private Integer pageSize = 10;
+
     @ApiModelProperty("总记录数")
     private Long totalCount;
+
     @ApiModelProperty("总页数")
     private Integer totalPage;
+
     @ApiModelProperty("列表数据")
     private List<T> items;
 
