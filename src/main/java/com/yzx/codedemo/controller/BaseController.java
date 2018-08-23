@@ -18,7 +18,7 @@ public class BaseController {
 
     @ExceptionHandler(value = Exception.class)
     public ResultVO<Void> globalExceptionHandle(Exception e) {
-        logger.error("发生异常:", e);
+        logger.error("请求结果：0, 发生异常:", e);
         return ResultVO.getFailed("非常抱歉,服务器异常,请联系客服人员。");
     }
 

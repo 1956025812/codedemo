@@ -25,8 +25,9 @@ public class LogAspect {
 
     private final static Logger logger = LoggerFactory.getLogger(LogAspect.class);
 
-    // ..表示包及子包 该方法代表controller层的所有方法
-    @Pointcut("execution(public * com.yzx.codedemo.controller..*.*(..))")
+    // ..表示包及子包 该方法代表controller层的所有方法   注意： BaseController中的方法不需要执行切面
+    @Pointcut("execution(public * com.yzx.codedemo.controller..*.*(..)) " +
+            "&& !execution(public * com.yzx.codedemo.controller.BaseController.*(..))")
     public void ControllerLog() {
     }
 
@@ -42,9 +43,14 @@ public class LogAspect {
                 .append("URL = {" + request.getRequestURI() + "},\t")
                 .append("HTTP_METHOD = {" + request.getMethod() + "},\t")
                 .append("IP = {" + request.getRemoteAddr() + "},\t")
-                .append("CLASS_METHOD = {" + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName() + "},\t")
-                .append("ARGS = " + new ObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL)
-                        .writeValueAsString(joinPoint.getArgs()[0]) + "");
+                .append("CLASS_METHOD = {" + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName() + "},\t");
+
+        if(joinPoint.getArgs().length == 0) {
+            requestLog.append("请求参数 = {} ");
+        } else {
+            requestLog.append("请求参数 = " + new ObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL)
+                    .writeValueAsString(joinPoint.getArgs()[0]) + "");
+        }
 
         logger.info(requestLog.toString());
     }
