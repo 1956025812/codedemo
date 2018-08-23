@@ -5,11 +5,11 @@ import com.yzx.codedemo.vo.user.UserRoleVO;
 
 public interface UserRoleMapper {
 
-    int insert(UserRole record);
+    int insert(UserRole record) throws Exception;
 
-    int updateByPrimaryKeySelective(UserRole record);
+    int updateByPrimaryKeySelective(UserRole record) throws Exception;
 
-    UserRole selectByPrimaryKey(String id);
+    UserRole selectByPrimaryKey(String id) throws Exception;
 
     /**
      * 查询用户角色列表
@@ -19,6 +19,6 @@ public interface UserRoleMapper {
      *  </pre>
      * @return 用户角色VO对象
      */
-    UserRoleVO selectUserRoleVOList(UserRoleVO userRoleVO);
+    UserRoleVO selectUserRoleVOList(UserRoleVO userRoleVO) throws Exception;
 
 }

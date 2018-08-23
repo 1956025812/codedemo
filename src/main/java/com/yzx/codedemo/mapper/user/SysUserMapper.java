@@ -15,7 +15,7 @@ public interface SysUserMapper {
      * 批量新增用户
      * @param sysUserList 用户集合
      */
-    void saveSysUserBatch(@Param("sysUserList") List<SysUser> sysUserList);
+    void saveSysUserBatch(@Param("sysUserList") List<SysUser> sysUserList) throws Exception;
 
 
     /**
@@ -23,14 +23,14 @@ public interface SysUserMapper {
      * @param sysUser
      * @return
      */
-    int updateByPrimaryKeySelective(SysUser sysUser);
+    int updateByPrimaryKeySelective(SysUser sysUser) throws Exception;
 
 
     /**
      * 批量修改用户
      * @param sysUserList
      */
-    void updateSysUserBatch(@Param("sysUserList") List<SysUser> sysUserList);
+    void updateSysUserBatch(@Param("sysUserList") List<SysUser> sysUserList) throws Exception;
 
 
     /**
