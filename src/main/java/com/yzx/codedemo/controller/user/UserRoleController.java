@@ -1,5 +1,6 @@
 package com.yzx.codedemo.controller.user;
 
+import com.yzx.codedemo.controller.BaseController;
 import com.yzx.codedemo.service.user.UserRoleService;
 import com.yzx.codedemo.vo.ResultVO;
 import com.yzx.codedemo.vo.user.UserRoleVO;
@@ -16,7 +17,7 @@ import springfox.documentation.annotations.ApiIgnore;
 @Api(tags = {"UserRoleController"}, description = "用户角色关系Controller")
 @RestController
 @RequestMapping(value = "/userrole")
-public class UserRoleController {
+public class UserRoleController extends BaseController {
 
     @Autowired
     private UserRoleService userRoleService;
@@ -27,14 +28,8 @@ public class UserRoleController {
             @ApiImplicitParam(paramType = "query", dataType = "Long", name = "userId", value = "用户ID", required = true)
     })
     @GetMapping(value = "/list")
-    public ResultVO<UserRoleVO> selectUserRoleList(@ApiIgnore UserRoleVO userRoleVO) {
-        try {
-            return this.userRoleService.selectUserRoleList(userRoleVO);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResultVO.getFailed("查询用户角色列表失败");
-        }
-
+    public ResultVO<UserRoleVO> selectUserRoleList(@ApiIgnore UserRoleVO userRoleVO) throws Exception {
+        return this.userRoleService.selectUserRoleList(userRoleVO);
     }
 
 

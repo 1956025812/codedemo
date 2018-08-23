@@ -1,5 +1,6 @@
 package com.yzx.codedemo.controller.user;
 
+import com.yzx.codedemo.controller.BaseController;
 import com.yzx.codedemo.entity.user.SysUser;
 import com.yzx.codedemo.service.user.SysUserService;
 import com.yzx.codedemo.vo.PageVO;
@@ -15,7 +16,7 @@ import java.util.List;
 @Api(tags = {"SysUserController"}, description = "用户Controller")
 @RestController
 @RequestMapping(value = "/sysuser")
-public class SysUserController {
+public class SysUserController extends BaseController {
 
     @Autowired
     private SysUserService sysUserService;
@@ -28,13 +29,8 @@ public class SysUserController {
             @ApiImplicitParam(paramType = "body", dataType = "String", name = "phone", value = "手机号", required = false)
     })
     @PostMapping("/save")
-    public ResultVO<SysUser> saveSysUser(@ApiIgnore @RequestBody SysUserVO sysUserVO) {
-        try {
-            return this.sysUserService.saveSysUser(sysUserVO);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResultVO.getFailed("添加用户失败");
-        }
+    public ResultVO<SysUser> saveSysUser(@ApiIgnore @RequestBody SysUserVO sysUserVO) throws Exception {
+        return this.sysUserService.saveSysUser(sysUserVO);
     }
 
 
@@ -43,13 +39,8 @@ public class SysUserController {
             @ApiImplicitParam(paramType = "body", dataType = "String", name = "sysUserVOList", value = "用户集合", required = true)
     })
     @PostMapping("/save/batch")
-    public ResultVO<Void> saveSysUserBatch(@ApiIgnore @RequestBody SysUserVO sysUserVO) {
-        try {
-            return this.sysUserService.saveSysUserBatch(sysUserVO);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResultVO.getSuccess("批量添加用户失败");
-        }
+    public ResultVO<Void> saveSysUserBatch(@ApiIgnore @RequestBody SysUserVO sysUserVO) throws Exception {
+        return this.sysUserService.saveSysUserBatch(sysUserVO);
     }
 
 
@@ -60,13 +51,8 @@ public class SysUserController {
             @ApiImplicitParam(paramType = "body", dataType = "String", name = "phone", value = "手机号", required = false)
     })
     @PostMapping(value = "/update")
-    public ResultVO<Void> updateSysUser(@ApiIgnore @RequestBody SysUserVO sysUserVO) {
-        try {
-            return this.sysUserService.updateSysUser(sysUserVO);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResultVO.getFailed("修改用户失败");
-        }
+    public ResultVO<Void> updateSysUser(@ApiIgnore @RequestBody SysUserVO sysUserVO) throws Exception {
+        return this.sysUserService.updateSysUser(sysUserVO);
     }
 
 
@@ -75,13 +61,8 @@ public class SysUserController {
             @ApiImplicitParam(paramType = "body", dataType = "String", name = "sysUserVOList", value = "用户集合", required = true)
     })
     @PostMapping(value = "/update/batch")
-    public ResultVO<Void> updateSysUserBatch(@ApiIgnore @RequestBody SysUserVO sysUserVO) {
-        try {
-            return this.sysUserService.updateSysUserBatch(sysUserVO);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResultVO.getSuccess("批量修改用户成功");
-        }
+    public ResultVO<Void> updateSysUserBatch(@ApiIgnore @RequestBody SysUserVO sysUserVO) throws Exception {
+        return this.sysUserService.updateSysUserBatch(sysUserVO);
     }
 
 
@@ -91,13 +72,8 @@ public class SysUserController {
             @ApiImplicitParam(paramType = "body", dataType = "Long", name = "userState", value = "用户状态 0删除 1正常", required = false)
     })
     @PostMapping(value = "/update/state")
-    public ResultVO<Void> updateSysUserState(@ApiIgnore @RequestBody SysUserVO sysUserVO) {
-        try {
-            return this.sysUserService.updateSysUserState(sysUserVO);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResultVO.getFailed("修改用户状态失败");
-        }
+    public ResultVO<Void> updateSysUserState(@ApiIgnore @RequestBody SysUserVO sysUserVO) throws Exception {
+        return this.sysUserService.updateSysUserState(sysUserVO);
     }
 
 
@@ -107,13 +83,8 @@ public class SysUserController {
             @ApiImplicitParam(paramType = "body", dataType = "Long", name = "userState", value = "用户状态", required = false)
     })
     @PostMapping(value = "/update/state/batch")
-    public ResultVO<Void> updateSysUserStateBatch(@ApiIgnore @RequestBody SysUserVO sysUserVO) {
-        try {
-            return this.sysUserService.updateSysUserStateBatch(sysUserVO);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResultVO.getFailed("批量修改用户状态失败");
-        }
+    public ResultVO<Void> updateSysUserStateBatch(@ApiIgnore @RequestBody SysUserVO sysUserVO) throws Exception {
+        return this.sysUserService.updateSysUserStateBatch(sysUserVO);
     }
 
 
@@ -125,13 +96,8 @@ public class SysUserController {
             @ApiImplicitParam(paramType = "query", dataType = "String", name = "phone", value = "手机号", required = false)
     })
     @GetMapping(value = "/select")
-    public ResultVO<SysUserVO> selectSysUser(@ApiIgnore SysUserVO sysUserVO) {
-        try {
-            return this.sysUserService.selectSysUser(sysUserVO);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResultVO.getFailed("查询用户失败");
-        }
+    public ResultVO<SysUserVO> selectSysUser(@ApiIgnore SysUserVO sysUserVO) throws Exception {
+        return this.sysUserService.selectSysUser(sysUserVO);
     }
 
 
@@ -144,13 +110,8 @@ public class SysUserController {
             @ApiImplicitParam(paramType = "query", dataType = "String", name = "endtime", value = "结束时间 格式：yyyy-MM-dd HH:mm:ss", required = false)
     })
     @GetMapping(value = "/list")
-    public ResultVO<List<SysUserVO>> selectSysUserList(@ApiIgnore SysUserVO sysUserVO) {
-        try {
-            return this.sysUserService.selectSysUserList(sysUserVO);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResultVO.getFailed("查询用户列表失败");
-        }
+    public ResultVO<List<SysUserVO>> selectSysUserList(@ApiIgnore SysUserVO sysUserVO) throws Exception {
+        return this.sysUserService.selectSysUserList(sysUserVO);
     }
 
 
@@ -165,13 +126,8 @@ public class SysUserController {
             @ApiImplicitParam(paramType = "query", dataType = "String", name = "endtime", value = "结束时间 格式：yyyy-MM-dd HH:mm:ss", required = false)
     })
     @GetMapping(value = "/page")
-    public ResultVO<PageVO<SysUserVO>> selectSysUserPage(@ApiIgnore SysUserVO sysUserVO) {
-        try {
-            return this.sysUserService.selectSysUserPage(sysUserVO);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResultVO.getSuccess("查询用户分页列表失败");
-        }
+    public ResultVO<PageVO<SysUserVO>> selectSysUserPage(@ApiIgnore SysUserVO sysUserVO) throws Exception {
+        return this.sysUserService.selectSysUserPage(sysUserVO);
     }
 
 
