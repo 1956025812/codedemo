@@ -137,7 +137,7 @@ public class SysUserServiceImpl implements SysUserService {
     public ResultVO<List<SysUserVO>> selectSysUserList(SysUserVO sysUserVO) throws Exception {
 
         List<SysUserVO> sysUserVOList = this.sysUserMapper.selectSysUserVOList(sysUserVO);
-        System.out.println(1/0);
+
         return ResultVO.getSuccess("查询用户列表成功", sysUserVOList);
     }
 
