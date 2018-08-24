@@ -31,7 +31,7 @@ public interface SysUserService {
      *  <pre>
      *      sysUserVOList 用户集合
      *  </pre>
-     * @return Void
+     * @return VOID
      * @throws Exception
      */
     ResultVO<Void> saveSysUserBatch(SysUserVO sysUserVO) throws Exception;
@@ -46,7 +46,7 @@ public interface SysUserService {
      *      password 密码<br>
      *      phone 手机号
      *  </pre>
-     * @return Void
+     * @return VOID
      * @throws Exception
      */
     ResultVO<Void> updateSysUser(SysUserVO sysUserVO) throws Exception;
@@ -58,7 +58,7 @@ public interface SysUserService {
      *  <pre>
      *      sysUserVOList 用户集合
      *  </pre>
-     * @return Void
+     * @return VOID
      * @throws Exception
      */
     ResultVO<Void> updateSysUserBatch(SysUserVO sysUserVO) throws Exception;
@@ -72,7 +72,7 @@ public interface SysUserService {
      *      userId 用户ID <br>
      *      userState 用户状态
      * </pre>
-     * @return Void
+     * @return VOID
      * @throws Exception
      */
     ResultVO<Void> updateSysUserState(SysUserVO sysUserVO) throws Exception;
@@ -86,7 +86,7 @@ public interface SysUserService {
      *      userIdList 用户ID集合 <br>
      *      userState 用户状态
      * </pre>
-     * @return Void
+     * @return VOID
      * @throws Exception
      */
     ResultVO<Void> updateSysUserStateBatch(SysUserVO sysUserVO) throws Exception;
@@ -101,10 +101,10 @@ public interface SysUserService {
      *      passowrd 密码<br>
      *      phone 手机号
      *  </pre>
-     * @return 用户VO对象
+     * @return SysUserVO
      * @throws Exception
      */
-    ResultVO<SysUserVO> selectSysUser(SysUserVO sysUserVO) throws Exception;
+    ResultVO<SysUserVO> selectSysUserVO(SysUserVO sysUserVO) throws Exception;
 
 
     /**

@@ -96,8 +96,8 @@ public class SysUserController extends BaseController {
             @ApiImplicitParam(paramType = "query", dataType = "String", name = "phone", value = "手机号", required = false)
     })
     @GetMapping(value = "/select")
-    public ResultVO<SysUserVO> selectSysUser(@ApiIgnore SysUserVO sysUserVO) throws Exception {
-        return this.sysUserService.selectSysUser(sysUserVO);
+    public ResultVO<SysUserVO> selectSysUserVO(@ApiIgnore SysUserVO sysUserVO) throws Exception {
+        return this.sysUserService.selectSysUserVO(sysUserVO);
     }
 
 
